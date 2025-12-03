@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int percentageLetter(string s, char letter) {
+        int count=0;
+        int n=s.length();
+        unordered_map<char,int>mp;
+        for(char ch:s){
+            mp[ch]++;
+        }
+        for(auto p:mp){
+            if(p.first==letter){
+                count+=p.second;
+            }
+        }
+        return ((count)*100/n);
+    }
+};
