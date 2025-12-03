@@ -1,0 +1,16 @@
+class Solution {
+public:
+    char repeatedCharacter(string s) {
+        unordered_set<char> set;
+        char ch;
+        for (auto i : s) {
+            if (set.count(i)) {
+                ch = i;
+                break;
+            } else {
+                set.insert(i);
+            }
+        }
+        return ch;
+    }
+};
