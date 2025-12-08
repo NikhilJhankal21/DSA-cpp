@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> recoverOrder(vector<int>& order, vector<int>& friends) {
+        unordered_set<int>set;
+        vector<int>ans;
+        for(int i=0;i<friends.size();i++){
+            set.insert(friends[i]);
+        }
+        for(int i=0;i<order.size();i++){
+            if(set.find(order[i])!=set.end()){
+                ans.push_back(order[i]);
+            }
+        }
+        return ans;
+    }
+};
