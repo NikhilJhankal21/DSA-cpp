@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        vector<int> freq(26, 0); // To store frequency of each character
+        int maxCount = 0;        // Max freq of a single char in current window
+        int left = 0;            // Left pointer of window
+        int result = 0;          // Result for max window size
+
+        for (int right = 0; right < s.length(); ++right) {
+            freq[s[right] - 'A']++;
+            maxCount = max(maxCount, freq[s[right] - 'A']);
+
+            // If replacements needed > k, shrink window from left
+            while ((right - left + 1) - maxCount > k) {
+                freq[s[left] - 'A']--;
+                left++;
+            }
+            result = max(result, right - left + 1);
+        }
+        return result;
+    }
+};
