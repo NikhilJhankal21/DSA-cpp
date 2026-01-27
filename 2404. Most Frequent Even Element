@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int mostFrequentEven(vector<int>& nums) {
+        int n = nums.size();
+        int maxfreq = 0;
+        bool flag = false;
+        unordered_map<int, int> mp;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] % 2 == 0) {
+                mp[nums[i]]++;
+                maxfreq=max(maxfreq,mp[nums[i]]);
+                flag =true;
+            }
+        }
+        int minval = INT_MAX;
+        for (auto x : mp) {
+            if (x.second == maxfreq) {
+                minval = min(minval, x.first);
+            }
+        }
+        if(flag) return minval;
+        return -1;
+    }
+};
