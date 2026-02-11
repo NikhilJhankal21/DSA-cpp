@@ -29,3 +29,21 @@ public:
             return false;
     }
 };
+
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int n = s1.length();
+        int m = s2.length();
+        if (n > m) return false;
+        sort(s1.begin(), s1.end()); // Sort s1 once
+
+        for (int i = 0; i <= m - n; ++i) { // Loop over all substrings of s2 with length n
+            string sub = s2.substr(i, n);  // Take substring starting at i
+            sort(sub.begin(), sub.end());  // Sort the substring
+            if (sub == s1) return true;    // Compare with sorted s1
+        }
+        return false; // No match found
+    }
+};	
