@@ -1,0 +1,16 @@
+class Solution {     // Left to Right
+public:
+    long long minimumSteps(string s) {
+        long long swap=0;
+        int n=s.length();
+        int white=0;
+        for(int i=n-1;i>=0;i--){
+            if(s[i]=='0'){
+                white++;
+            }else{
+                swap+=white;
+            }
+        }
+        return swap;
+    }
+};
