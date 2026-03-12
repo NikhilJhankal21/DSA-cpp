@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void getallSubSets(vector<int>& nums,vector<int>&ans,int i,vector<vector<int>> &allSubSets){
+        if(i==nums.size()){
+            allSubSets.push_back(ans);
+            return;
+        }
+        // Include 
+        ans.push_back(nums[i]);
+        getallSubSets(nums,ans,i+1,allSubSets);
+        ans.pop_back();
+
+        int idx=i+1;             // To get rid of dupliactes
+        while(idx<nums.size() && nums[idx]==nums[idx-1]) idx++;
+
+        // Exclude
+        getallSubSets(nums,ans,idx,allSubSets);
+
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> allSubSets;
+        vector<int>ans;
+        getallSubSets(nums,ans,0,allSubSets);
+        return allSubSets;
+
+
+    }
+};
