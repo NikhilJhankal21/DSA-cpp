@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int result=INT_MAX;
+    int n;
+    void solve(int idx,vector<int>& cookies,vector<int>&child,int k ){
+        if(idx>=n){
+            int unfairness=*max_element(child.begin(),child.end());
+            result=min(result,unfairness);
+            return;
+        }
+        int cookie=cookies[idx];
+        for(int i=0;i<k;i++){
+            child[i]+=cookie;    
+            solve(idx+1,cookies,child,k); // Explore
+            child[i]-=cookie;
+        }
+    }
+    int distributeCookies(vector<int>& cookies, int k) {
+        n=cookies.size();
+        vector<int>child(k,0);
+        solve(0,cookies,child,k);
+        return result;
+    }
+};
