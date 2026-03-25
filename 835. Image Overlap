@@ -1,6 +1,5 @@
 class Solution {
 public:
-
     int countOverlaps(vector<vector<int>>& A, vector<vector<int>>& B,int rowOff,int colOff){
         int n=A.size();
         int count=0;
