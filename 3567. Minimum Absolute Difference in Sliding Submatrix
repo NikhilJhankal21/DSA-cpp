@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> minAbsDiff(vector<vector<int>>& grid, int k) {
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<vector<int>> ans(m - k + 1, vector<int>(n - k + 1));
+        for (int i = 0; i <= m - k; i++) {
+            for (int j = 0; j <= n - k; j++) {
+                set<int> st;
+                for (int x = i; x <= i + k - 1; x++) {
+                    for (int y = j; y <= j + k - 1; y++) {
+                        st.insert(grid[x][y]);
+                    }
+                }
+                vector<int> temp(st.begin(), st.end());
+                int mindiff = INT_MAX;
+                for (int t = 1; t < temp.size(); t++) {
+                    mindiff = min(mindiff, abs(temp[t] - temp[t - 1]));
+                }
+                ans[i][j] = (temp.size() == 1) ? 0 : mindiff;
+            }
+        }
+        return ans;
+    }
+};
