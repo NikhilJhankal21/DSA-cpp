@@ -1,0 +1,31 @@
+class Solution {
+public:
+    // Matrix ko 90 degree clockwise rotate karne ka function
+    void rotate(vector<vector<int>>& mat) {
+        int n = mat.size();
+        
+        // Step 1: Transpose (Rows ko columns bana do)
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                swap(mat[i][j], mat[j][i]);
+            }
+        }
+        
+        // Step 2: Har row ko reverse kar do
+        for (int i = 0; i < n; i++) {
+            reverse(mat[i].begin(), mat[i].end());
+        }
+    }
+
+    bool findRotation(vector<vector<int>>& mat, vector<vector<int>>& target) {
+        // Hum 4 baar rotate karke check karenge (0, 90, 180, 270 degrees)
+        for (int k = 0; k < 4; k++) {
+            // C++ mein vectors ko direct == se compare kar sakte hain
+            if (mat == target) return true;
+            
+            rotate(mat);
+        }
+        
+        return false;
+    }
+};
