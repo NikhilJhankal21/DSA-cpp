@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int closestTarget(vector<string>& words, string target, int startIndex) {
+        int ans=INT_MAX;
+        int straightDist=0;
+        int n=words.size();
+        int circularDist=0;
+        for(int i=0;i<n;i++){
+            if(words[i]==target){
+                straightDist=abs(i-startIndex);
+                circularDist=n-straightDist;
+                ans=min({ans,straightDist,circularDist});
+            }
+        }
+        return ans==INT_MAX?-1:ans;
+    }
+};
