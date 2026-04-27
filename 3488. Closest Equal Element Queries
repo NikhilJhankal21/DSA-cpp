@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> solveQueries(vector<int>& nums, vector<int>& queries) {
+        unordered_map<int,vector<int>>mp;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            mp[nums[i]].push_back(i);
+        }
+        vector<int>result;
+        for(auto i:queries){
+            int element=nums[i];
+            vector<int>&vec=mp[element];
+            int p=vec.size();
+            // If size is 1 then there is no more occurenece in mp 
+            if(p==1){
+                result.push_back(-1);
+                continue;
+            }
+            int pos=lower_bound(vec.begin(),vec.end(),i)-vec.begin();
+            int res=INT_MAX;
+            // Right Neighbour
+            int right=vec[(pos+1)%p];
+            int d=abs(i-right);  // Straight forward Distance
+            int circularDist=n-d;
+            res=min({res,d,circularDist});
+
+            // Left Neighbour
+            int left=vec[(pos-1+p)%p]; // Straight forward distance
+            d=abs(i-left);
+            circularDist=n-d;
+            res=min({res,d,circularDist});
+            result.push_back(res);
+        }
+        return result;
+    }
+};
