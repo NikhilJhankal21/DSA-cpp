@@ -1,0 +1,27 @@
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode*temp=head;
+        int count=0;
+        // check if k nodes exist
+        while(count<k){
+            if(temp==NULL)  return head;
+            temp=temp->next;
+            count++;
+        }
+        // recursive call for rest of LinkList
+        ListNode*newStartingNode=reverseKGroup(temp,k);
+
+        // reverse current group
+        temp=head, count=0;
+        while(count<k){
+            ListNode*next=temp->next;   // address lose na hojaye 
+            temp->next=newStartingNode;
+
+            newStartingNode=temp;
+            temp=next;
+            count++;
+        }
+        return newStartingNode;
+    }
+};
