@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        vector<int>vec;
+        int maxsum=INT_MIN;
+        while(head!=NULL){
+            vec.push_back(head->val);
+            head=head->next;
+        }
+        int i=0;
+        int j=vec.size()-1;
+        int sum=0;
+        while(i<j){
+            sum=vec[i]+vec[j];
+            maxsum=max(maxsum,sum);
+            i++;
+            j--;
+        }
+        return maxsum;
+    }
+};
