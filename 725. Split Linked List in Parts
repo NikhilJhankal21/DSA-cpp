@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<ListNode*> splitListToParts(ListNode* head, int k) {
+        ListNode*temp=head;
+        int n=0;
+        while(temp!=NULL){
+            n++;
+            temp=temp->next;
+        }
+        int partSize=n/k;   // itne size ki honi hi chahiye 
+        int extra=n%k;      // extra itne add krne hai sab mai jab tak khatam na hojaye
+        vector<ListNode*>ans(k);
+        ListNode*curr=head; 
+        ListNode*prev=NULL;
+        for(int i=0;i<k;i++){
+            ans[i]=curr;
+            for(int count=1; count<=partSize + ( extra > 0 ? 1 : 0); count++){
+                prev=curr;
+                curr=curr->next;
+            }
+            if(prev!=NULL) prev->next=NULL;
+            extra--;
+        }
+        return ans;
+    }
+};
