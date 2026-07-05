@@ -8,5 +8,6 @@ public:
             if(heights[i]!=expected[i]) count++;
         }
         return count;
+
     }
 };
